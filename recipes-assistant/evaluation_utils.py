@@ -79,14 +79,12 @@ class RAGWithUsage(RAGBase):
         self.last_usage = None
 
     def search(self, query, num_results=5):
-        boost_dict = {"question": 1.0, "answer": 2.0, "section": 0.1}
-        filter_dict = {"course": self.course}
+        boost_dict = {'recipe_name': 2.0, 'ingredients': 5.0}
 
         return self.index.search(
             query,
             num_results=num_results,
             boost_dict=boost_dict,
-            filter_dict=filter_dict
         )
 
     def llm(self, prompt):
