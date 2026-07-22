@@ -1,5 +1,9 @@
 # Quick Recipes Assistant
 
+<p align="center">
+  <img src="images/istockphoto-1679664848-612x612.jpg" width="600">
+</p>
+
 A RAG-powered AI assistant that recommends quick recipes based on the ingredients you already have, the time you have available, and your dietary preferences.
 
 The project combines Retrieval-Augmented Generation (RAG), text search, and LLM to provide relevant recipe recommendations instead of relying solely on the model's internal knowledge.
