@@ -1,12 +1,19 @@
-# Quick Recipes Assistant
+<h1 align="center"> Quick Recipes Assistant</h1>
 
 <p align="center">
-  <img src="images/istockphoto-1679664848-612x612.jpg" width="600">
+A Retrieval-Augmented Generation (RAG) assistant that recommends quick recipes based on ingredients, cooking time and dietary preferences.
 </p>
 
-A RAG-powered AI assistant that recommends quick recipes based on the ingredients you already have, the time you have available, and your dietary preferences.
+<p align="center">
+<img src="images/istockphoto-1679664848-612x612.jpg" width="600">
+</p>
 
-The project combines Retrieval-Augmented Generation (RAG), text search, and LLM to provide relevant recipe recommendations instead of relying solely on the model's internal knowledge.
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+
+![OpenAI](https://img.shields.io/badge/OpenAI-GPT--5.4--mini-green)
+
+![RAG](https://img.shields.io/badge/RAG-Recipe_Assistant-orange)
+
 
 ## Project status: 🚧 Work in progress
 
@@ -26,15 +33,16 @@ I only have 20 minutes and want something healthy.*
 Instead of generating recipes from scratch, the assistant retrieves relevant recipes from a curated knowledge base and uses an LLM to produce accurate, context-aware responses.
 
 ## Architecture
-
+              
                 User Question
                       │
                       ▼
-             Embedding Generation
+               Index Generation
                       │
                       ▼
              Text Similarity Search
                       │
+                      ▼
              Top 5 Relevant Recipes
                       │
                       ▼
@@ -49,7 +57,7 @@ Instead of generating recipes from scratch, the assistant retrieves relevant rec
   - OpenAI API
   - Retrieval-Augmented Generation (RAG)
   - MinSearch
-  = PydanticAI
+  - PydanticAI
   - Pandas
 
 ## Dataset
@@ -139,10 +147,10 @@ Example:
 
 The generated dataset contains: \
            **598 RECIPES AND 607 QUERIES** \
-i.e. 1 expected (ground truth) recipe per query
+i.e. 1 expected (ground truth) recipe per query\
 
-Also, two queries per recipe was observed as ground truth dataset, but results were not significantly improved and cost was doubled for evaluation and for every following step as well. 
-Generating the final evaluation dataset cost approximately $0.34 using the OpenAI API. 
+Generating the final evaluation dataset cost approximately $0.34 using the OpenAI API. \
+I also experimented with generating two synthetic queries per recipe. Although this increased the size of the evaluation dataset, it did not significantly improve retrieval performance while approximately doubling the evaluation cost. Therefore, the final version uses one query per recipe.
 
 ## Retrieval Evaluation
 
