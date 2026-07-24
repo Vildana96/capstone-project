@@ -2,6 +2,8 @@ import time
 from dataclasses import dataclass, field
 from datetime import datetime
 
+import sys
+sys.path.append("..")  
 from rag_helper import RAGBase
 
 @dataclass
