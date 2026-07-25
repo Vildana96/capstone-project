@@ -7,9 +7,6 @@ chat:
 dashboard:
 	uv run streamlit run dashboard.py
 
-network: 
-	docker network create monitoring
-
 postgres: network
 	docker run -it \
 		--name course-assistant-pg \

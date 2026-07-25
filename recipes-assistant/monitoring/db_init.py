@@ -18,14 +18,13 @@ def init_db(drop=False):
     try:
         with conn.cursor() as cur:
             if drop:
-                cur.execute("DROP TABLE IF EXISTS conversations")
+                cur.execute("DROP TABLE IF EXISTS llm_call_records")
 
             cur.execute("""
-                CREATE TABLE conversations (
+                CREATE TABLE llm_call_records (
                     id SERIAL PRIMARY KEY,
-                    question TEXT NOT NULL,
+                    query TEXT NOT NULL,
                     answer TEXT NOT NULL,
-                    course TEXT NOT NULL,
                     model TEXT NOT NULL,
                     instructions TEXT NOT NULL,
                     prompt TEXT NOT NULL,
@@ -50,7 +49,7 @@ def init_feedback():
             cur.execute("""
                 CREATE TABLE feedback (
                     id SERIAL PRIMARY KEY,
-                    conversation_id INTEGER REFERENCES conversations(id),
+                    llm_call_id INTEGER REFERENCES llm_call_records(id),
                     source TEXT NOT NULL,
                     relevance TEXT,
                     explanation TEXT,
@@ -64,6 +63,6 @@ def init_feedback():
 
 
 if __name__ == "__main__":
-    # init_db()
+    init_db()
     init_feedback()
-    print("Database initialized")
+    print("Databases initialized")
