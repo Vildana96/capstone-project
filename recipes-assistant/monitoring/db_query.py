@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from db_init import get_db_connection
 from metrics import LLMCallRecord, Stats
 
+
 def row_to_record(row):
     return LLMCallRecord(
         model=row[4],
@@ -17,17 +18,17 @@ def row_to_record(row):
         timestamp=row[12],
     )
 
-def get_conversations(limit=10):
+def get_llm_calls(limit=10):
     conn = get_db_connection()
     try:
         with conn.cursor() as cur:
             cur.execute(
                 """
-                SELECT id, question, answer, course, model,
+                SELECT id, query, answer, model,
                        instructions, prompt,
                        prompt_tokens, completion_tokens, total_tokens,
                        response_time, cost, timestamp
-                FROM conversations
+                FROM llm_call_records
                 ORDER BY timestamp DESC
                 LIMIT %s
                 """,
@@ -49,7 +50,7 @@ def get_stats():
                     AVG(response_time),
                     SUM(cost),
                     AVG(total_tokens)
-                FROM conversations
+                FROM llm_call_records
             """)
             row = cur.fetchone()
     finally:
@@ -95,6 +96,6 @@ def get_user_feedback_stats():
 
 
 if __name__ == "__main__":
-    records = get_conversations()
+    records = get_llm_calls()
     for record in records:
         print(record)
