@@ -1,6 +1,6 @@
 import streamlit as st
 from assistant import create_assistant
-# from db_save import save_conversation
+from db_save import save_llm_call
 # from db_feedback import save_feedback
 # from judge import evaluate_relevance
 
@@ -25,9 +25,9 @@ if st.button("Ask"):
         st.write(f"Completion tokens: {record.completion_tokens}")
         st.write(f"Cost: ${record.cost:.4f}")
 
-        # conversation_id = save_conversation(record, user_input, "llm-zoomcamp")
-#         st.session_state.conversation_id = conversation_id
-#         st.write(f"{conversation_id}th conversation added")
+        llm_call_id = save_llm_call(record, user_input)
+        st.session_state.llm_call_id = llm_call_id
+        st.write(f"{llm_call_id}th LLM call added")
 
 #         relevance, explanation = evaluate_relevance(user_input, answer)
 #         save_feedback(conversation_id, "judge",

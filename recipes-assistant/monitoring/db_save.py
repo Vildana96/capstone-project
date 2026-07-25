@@ -1,7 +1,7 @@
 from datetime import datetime
 from db_init import get_db_connection, DB_TIMEZONE
 
-def save_conversation(record, question, course):
+def save_llm_call(record, query):
     timestamp = datetime.now(DB_TIMEZONE)
 
     conn = get_db_connection()
@@ -9,19 +9,19 @@ def save_conversation(record, question, course):
         with conn.cursor() as cur:
             cur.execute(
                 """
-                INSERT INTO conversations (
-                    question, answer, course, model, instructions, prompt,
+                INSERT INTO llm_call_records (
+                    query, answer, model, instructions, prompt,
                     prompt_tokens, completion_tokens, total_tokens,
                     response_time, cost, timestamp
                 ) VALUES (
-                    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+
                 )
                 RETURNING id
                 """,
                 (
-                    question,
+                    query,
                     record.answer,
-                    course,
                     record.model,
                     record.instructions,
                     record.prompt,
@@ -33,9 +33,9 @@ def save_conversation(record, question, course):
                     timestamp,
                 ),
             )
-            conversation_id = cur.fetchone()[0]
-            print(f"Conversation saved with ID: {conversation_id}")
+            llm_call_id = cur.fetchone()[0]
+            print(f"LLM call saved with ID: {llm_call_id}")
         conn.commit()
     finally:
         conn.close()
-    return conversation_id
+    return llm_call_id

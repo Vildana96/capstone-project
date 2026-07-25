@@ -6,7 +6,7 @@ from openai import OpenAI
 from ingest import load_data, build_index
 from metrics import RAGWithMetrics
 
-# from db_save import save_conversation
+from db_save import save_llm_call
 
 
 def create_assistant():
@@ -31,5 +31,8 @@ if __name__ == "__main__":
     answer = assistant.rag(query)
     print(answer)
 
-    # save_conversation(assistant.last_call, query, "llm-zoomcamp")
-    # print("Conversation saved to database")
+    save_llm_call(assistant.last_call, query)
+    print("LLM call saved to database")
+
+
+# docker exec -it course-assistant-pg psql -U user -d course_assistant     -c "SELECT id, response_time, cost FROM llm_call_records;"
