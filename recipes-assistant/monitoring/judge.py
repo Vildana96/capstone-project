@@ -11,7 +11,6 @@ from evaluation_utils import llm_structured_retry
 class RelevanceVerdict(BaseModel):
     relevance: Literal["NON_RELEVANT", "PARTLY_RELEVANT", "RELEVANT"]
     explanation: str
-    usage: float
 
 judge_instructions = """
 You are an expert evaluator for a RAG system.
@@ -44,15 +43,16 @@ def evaluate_relevance(query, answer, client=None):
         RelevanceVerdict,
     )
 
-    return result.relevance, result.explanation, result.usage.total_tokens
+    return result.relevance, result.explanation, usage.total_tokens
 
 
 if __name__ == "__main__":
     load_dotenv()
 
     query = "I need a high-protein vegetarian dinner."
-    answer = "Yes, you can still join. The course is self-paced."
+    answer = "A good high-protein vegetarian dinner from the context is Vegetarian Tortilla Soup. Protein: 9g per serving Total time: 55 mins Servings: 12 If you want, I can also suggest the highest-protein vegetarian option in the list, though it’s actually a smoothie."
 
-    relevance, explanation = evaluate_relevance(query, answer)
+    relevance, explanation, tokens = evaluate_relevance(query, answer)
     print(relevance)
     print(explanation)
+    print(tokens)
