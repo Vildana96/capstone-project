@@ -1,7 +1,7 @@
 import streamlit as st
 from assistant import create_assistant
 from db_save import save_llm_call
-# from db_feedback import save_feedback
+from db_feedback import save_feedback
 # from judge import evaluate_relevance
 
 assistant = create_assistant()
@@ -33,15 +33,15 @@ if st.button("Ask"):
 #         save_feedback(conversation_id, "judge",
 #                         relevance=relevance, explanation=explanation)
 
-# col1, col2 = st.columns(2)
-# with col1:
-#     if st.button("+1"):
-#         cid = st.session_state.conversation_id
-#         save_feedback(cid, "user", score=1)
-#         st.write("Thanks!")
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("+1"):
+        cid = st.session_state.conversation_id
+        save_feedback(cid, "user", score=1)
+        st.write("Thanks for the feedback!")
 
-# with col2:
-#     if st.button("-1"):
-#         cid = st.session_state.conversation_id
-#         save_feedback(cid, "user", score=-1)
-#         st.write("Thanks for the feedback!")
+with col2:
+    if st.button("-1"):
+        cid = st.session_state.conversation_id
+        save_feedback(cid, "user", score=-1)
+        st.write("Thanks for the feedback!")

@@ -1,7 +1,7 @@
 from datetime import datetime
 from db_init import get_db_connection, DB_TIMEZONE
 
-def save_feedback(conversation_id, source, relevance=None,
+def save_feedback(llm_call_id, source, relevance=None,
                   explanation=None, score=None):
     timestamp = datetime.now(DB_TIMEZONE)
 
@@ -11,13 +11,13 @@ def save_feedback(conversation_id, source, relevance=None,
             cur.execute(
                 """
                 INSERT INTO feedback (
-                    conversation_id, source, relevance,
+                    llm_call_id, source, relevance,
                     explanation, score, timestamp
                 ) VALUES (
                     %s, %s, %s, %s, %s, %s
                 )
                 """,
-                (conversation_id, source, relevance,
+                (llm_call_id, source, relevance,
                  explanation, score, timestamp),
             )
             print(f"Feedback saved")
