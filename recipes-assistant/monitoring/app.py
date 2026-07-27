@@ -19,15 +19,15 @@ if st.button("Ask"):
         st.write(answer)
 
         record = assistant.last_call
-        st.subheader("Metrics")
-        st.write(f"Response time: {record.response_time:.2f}s")
-        st.write(f"Prompt tokens: {record.prompt_tokens}")
-        st.write(f"Completion tokens: {record.completion_tokens}")
-        st.write(f"Cost: ${record.cost:.4f}")
+        # st.subheader("Metrics")
+        # st.write(f"Response time: {record.response_time:.2f}s")
+        # st.write(f"Prompt tokens: {record.prompt_tokens}")
+        # st.write(f"Completion tokens: {record.completion_tokens}")
+        # st.write(f"Cost: ${record.cost:.4f}")
 
         llm_call_id = save_llm_call(record, user_input)
         st.session_state.llm_call_id = llm_call_id
-        st.write(f"{llm_call_id}th LLM call added")
+        # st.write(f"{llm_call_id}th LLM call added")
 
 #         relevance, explanation = evaluate_relevance(user_input, answer)
 #         save_feedback(conversation_id, "judge",

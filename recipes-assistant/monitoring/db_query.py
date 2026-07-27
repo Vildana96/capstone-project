@@ -6,16 +6,16 @@ from metrics import LLMCallRecord, Stats
 
 def row_to_record(row):
     return LLMCallRecord(
-        model=row[4],
-        prompt=row[6],
-        instructions=row[5],
+        model=row[3],
+        prompt=row[5],
+        instructions=row[4],
         answer=row[2],
-        prompt_tokens=row[7],
-        completion_tokens=row[8],
-        total_tokens=row[9],
-        response_time=row[10],
-        cost=row[11],
-        timestamp=row[12],
+        prompt_tokens=row[6],
+        completion_tokens=row[7],
+        total_tokens=row[8],
+        response_time=row[9],
+        cost=row[10],
+        timestamp=row[11],
     )
 
 def get_llm_calls(limit=10):
@@ -46,10 +46,13 @@ def get_stats():
         with conn.cursor() as cur:
             cur.execute("""
                 SELECT
-                    COUNT(*),
-                    AVG(response_time),
-                    SUM(cost),
-                    AVG(total_tokens)
+                    COUNT(*) AS total,
+                    AVG(response_time) AS avg_response_time,
+                    SUM(cost) AS total_cost,
+                    AVG(total_tokens) AS avg_tokens,
+                    AVG(prompt_tokens) AS avg_prompt_tokens,
+                    AVG(completion_tokens) AS avg_completion_tokens,
+                    SUM(total_tokens) AS total_tokens
                 FROM llm_call_records
             """)
             row = cur.fetchone()
@@ -61,6 +64,10 @@ def get_stats():
         avg_response_time=row[1],
         total_cost=row[2],
         avg_tokens=row[3],
+        avg_prompt_tokens=row[4],
+        avg_completion_tokens=row[5],
+        total_tokens=row[6],
+
     )
 
 def get_relevance_stats():

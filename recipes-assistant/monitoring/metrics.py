@@ -25,6 +25,9 @@ class Stats:
     avg_response_time: float
     total_cost: float
     avg_tokens: float
+    avg_prompt_tokens: float
+    avg_completion_tokens: float
+    total_tokens: float
     
 
 def calculate_cost(model, usage):
