@@ -27,7 +27,6 @@ This assistant allows users to ask questions such as:
 
 *I have chicken, rice and broccoli. What can I cook in under 30 minutes?
 I need a high-protein vegetarian dinner.
-What's an easy meal with eggs and spinach?
 I only have 20 minutes and want something healthy.*
 
 Instead of generating recipes from scratch, the assistant retrieves relevant recipes from a curated knowledge base and uses an LLM to produce accurate, context-aware responses.

@@ -18,13 +18,14 @@ if st.button("Ask"):
         st.success("Completed!")
         st.write(answer)
 
-        record = assistant.last_call
+        
         # st.subheader("Metrics")
         # st.write(f"Response time: {record.response_time:.2f}s")
         # st.write(f"Prompt tokens: {record.prompt_tokens}")
         # st.write(f"Completion tokens: {record.completion_tokens}")
         # st.write(f"Cost: ${record.cost:.4f}")
 
+        record = assistant.last_call
         llm_call_id = save_llm_call(record, user_input)
         st.session_state.llm_call_id = llm_call_id
         # st.write(f"{llm_call_id}th LLM call added")
@@ -33,15 +34,15 @@ if st.button("Ask"):
 #         save_feedback(conversation_id, "judge",
 #                         relevance=relevance, explanation=explanation)
 
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("+1"):
-        cid = st.session_state.conversation_id
-        save_feedback(cid, "user", score=1)
-        st.write("Thanks for the feedback!")
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("+1"):
+            cid = st.session_state.llm_call_id
+            save_feedback(cid, "user", score=1)
+            st.write("Thanks for the feedback!")
 
-with col2:
-    if st.button("-1"):
-        cid = st.session_state.conversation_id
-        save_feedback(cid, "user", score=-1)
-        st.write("Thanks for the feedback!")
+    with col2:
+        if st.button("-1"):
+            cid = st.session_state.llm_call_id
+            save_feedback(cid, "user", score=-1)
+            st.write("Thanks for the feedback!")
