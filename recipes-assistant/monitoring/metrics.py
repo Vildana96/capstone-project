@@ -28,6 +28,27 @@ class Stats:
     avg_prompt_tokens: float
     avg_completion_tokens: float
     total_tokens: float
+
+@dataclass
+class FeedbackStats:
+    total: int
+    user_total: int
+    judge_total: int
+    avg_score: float
+    user_avg_score: float
+    judge_avg_score: float
+
+
+@dataclass
+class FeedbackRecord:
+    llm_call_id: int
+    query: str
+    answer: str
+    source: str
+    relevance: str | None
+    explanation: str | None
+    score: int | None
+    timestamp: datetime
     
 
 def calculate_cost(model, usage):

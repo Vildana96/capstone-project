@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from db_init import get_db_connection
-from metrics import LLMCallRecord, Stats
+from metrics import LLMCallRecord, Stats, FeedbackRecord, FeedbackStats
 
 
 def row_to_record(row):
@@ -16,6 +16,18 @@ def row_to_record(row):
         response_time=row[9],
         cost=row[10],
         timestamp=row[11],
+    )
+
+def feedback_row_to_record(row):
+    return FeedbackRecord(
+        llm_call_id=row[0],
+        query=row[1],
+        answer=row[2],
+        source=row[3],
+        relevance=row[4],
+        explanation=row[5],
+        score=row[6],
+        timestamp=row[7],
     )
 
 def get_llm_calls(limit=10):
@@ -70,36 +82,37 @@ def get_stats():
 
     )
 
-def get_relevance_stats():
+def get_feedback(limit=100):
     conn = get_db_connection()
-    try:
-        with conn.cursor() as cur:
-            cur.execute("""
-                SELECT relevance, COUNT(*)
-                FROM feedback
-                WHERE source = 'judge'
-                GROUP BY relevance
-            """)
-            rows = cur.fetchall()
-    finally:
-        conn.close()
-    return dict(rows)
 
-def get_user_feedback_stats():
-    conn = get_db_connection()
     try:
         with conn.cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 SELECT
-                    SUM(CASE WHEN score > 0 THEN 1 ELSE 0 END),
-                    SUM(CASE WHEN score < 0 THEN 1 ELSE 0 END)
-                FROM feedback
-                WHERE source = 'user'
-            """)
-            row = cur.fetchone()
+                    f.llm_call_id,
+                    l.query,
+                    l.answer,
+                    f.source,
+                    f.relevance,
+                    f.explanation,
+                    f.score,
+                    f.timestamp
+                FROM feedback f
+                JOIN llm_call_records l
+                    ON f.llm_call_id = l.id
+                ORDER BY f.timestamp DESC
+                LIMIT %s;
+                """,
+                (limit,),
+            )
+
+            rows = cur.fetchall()
+
     finally:
         conn.close()
-    return row
+
+    return [feedback_row_to_record(row) for row in rows]
 
 
 if __name__ == "__main__":

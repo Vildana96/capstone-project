@@ -35,4 +35,4 @@ if __name__ == "__main__":
     print("LLM call saved to database")
 
 
-# docker exec -it course-assistant-pg psql -U user -d course_assistant     -c "SELECT id, response_time, cost FROM llm_call_records;"
+# docker exec -it recipe-assistant-pg psql -U user -d course_assistant     -c "SELECT id, response_time, cost FROM llm_call_records;"
