@@ -5,7 +5,7 @@ chat:
 	uv run streamlit run app.py
 
 dashboard:
-	uv run streamlit run dashboard.py
+	uv run streamlit run streamlit_dashboard.py
 
 network: 
 	docker network create monitoring2

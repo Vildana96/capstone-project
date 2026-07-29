@@ -114,6 +114,53 @@ def get_feedback(limit=100):
 
     return [feedback_row_to_record(row) for row in rows]
 
+def get_feedback_stats():
+    conn = get_db_connection()
+
+    try:
+        with conn.cursor() as cur:
+
+            cur.execute(
+                """
+                SELECT
+                    COUNT(*) AS total,
+
+                    COUNT(*) FILTER (
+                        WHERE source = 'user'
+                    ) AS user_total,
+
+                    COUNT(*) FILTER (
+                        WHERE source = 'judge'
+                    ) AS judge_total,
+
+                    AVG(score) AS avg_score,
+
+                    AVG(score) FILTER (
+                        WHERE source = 'user'
+                    ) AS user_avg_score,
+
+                    AVG(score) FILTER (
+                        WHERE source = 'judge'
+                    ) AS judge_avg_score
+
+                FROM feedback
+                """
+            )
+
+            row = cur.fetchone()
+
+    finally:
+        conn.close()
+
+    return FeedbackStats(
+        total=row[0],
+        user_total=row[1],
+        judge_total=row[2],
+        avg_score=row[3] or 0,
+        user_avg_score=row[4] or 0,
+        judge_avg_score=row[5] or 0,
+    )
+
 
 if __name__ == "__main__":
     records = get_llm_calls()
