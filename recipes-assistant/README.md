@@ -15,10 +15,6 @@ A Retrieval-Augmented Generation (RAG) assistant that recommends quick recipes b
 ![RAG](https://img.shields.io/badge/RAG-Recipe_Assistant-orange)
 
 
-## Project status: 🚧 Work in progress
-
-Future work includes adding a production database, analytics dashboard, and deployment.
-
 ## Problem  🍳 
 
 Many recipe websites require users to search manually or browse through hundreds of recipes.
@@ -70,7 +66,7 @@ The assistant uses a curated recipe dataset containing 598 recipes. Each recipe 
 - Nutritional information (fat, protein, carbohydrates, fiber, vitamins, etc.)
 
 
-## Project Structure (to be updated)
+## Project Structure 
     .
     ├── agent.py              # PydanticAI agent
     ├── ingest.py             # Dataset loading and indexing
@@ -138,11 +134,18 @@ Example:
 
     Recipe:
     
-    Persimmon Oatmeal Cookies
+    No-Bake Chocolate Coconut Cookies
+    Total time: 20 mins
+    Servings: 24
+
+    Ingredients:
+    - 3 cups quick cooking oats
+    ...
     
     Generated query:
     
-    Can you give me a quick 25-minute cookie recipe using persimmons and oats?
+    Can you give me a quick 20-minute cookie recipe using oats?
+    
 
 The generated dataset contains: \
            **598 RECIPES AND 607 QUERIES** \
@@ -219,8 +222,9 @@ A dedicated Streamlit monitoring dashboard visualizes these metrics, helping ide
        │
        ▼
     Recipe Response
-            ▼
-     Streamlit Dashboard
+               ▼
+       Streamlit Dashboard
+     
 
 ### 🤖 Assistant Demo
 
@@ -232,7 +236,7 @@ The following demonstration shows the complete user workflow:
 * logging the interaction for monitoring,
 * collecting optional user feedback.
 
-▶️ *Insert screen recording or GIF here*
+▶️ ![Assistant Demo](images/assistant_demo.gif)
 
 ### 📊 Dashboard Demo
 
