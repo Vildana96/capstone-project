@@ -134,18 +134,24 @@ def get_feedback_stats():
                     ) AS judge_total,
 
                     COUNT(*) FILTER (
-                        WHERE score = 1 AND source = 'judge') AS judge_positive,
+                        WHERE score = 1 AND source = 'judge'
+                    ) AS judge_score_positive,
                     COUNT(*) FILTER (
-                        WHERE score = 0 AND source = 'judge') AS judge_neutral,
+                        WHERE score = 0 AND source = 'judge'
+                    ) AS judge_score_neutral,
                     COUNT(*) FILTER (
-                        WHERE score = -1 AND source = 'judge') AS judge_negative,
+                        WHERE score = -1 AND source = 'judge'
+                    ) AS judge_score_negative,
                     
                     COUNT(*) FILTER (
-                        WHERE score = 1 AND source = 'user') AS user_positive,
+                        WHERE score = 1 AND source = 'user'
+                    ) AS user_score_positive,
                     COUNT(*) FILTER (
-                        WHERE score = 0 AND source = 'user') AS user_neutral,
+                        WHERE score = 0 AND source = 'user'
+                    ) AS user_score_neutral,
                     COUNT(*) FILTER (
-                        WHERE score = -1 AND source = 'user') AS user_negative
+                        WHERE score = -1 AND source = 'user'
+                    ) AS user_negative
                 FROM feedback;
                 """
             )

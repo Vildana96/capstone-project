@@ -245,7 +245,7 @@ with tab4:
     # Metrics
     # ==================================================
 
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3 = st.columns(3)
 
     col1.metric(
         "Total Feedback",
@@ -262,21 +262,17 @@ with tab4:
         feedback_stats.judge_total
     )
 
-    col4.metric(
-        "Average Score",
-        f"{feedback_stats.avg_score:.2f}"
-    )
 
     col1, col2 = st.columns(2)
 
     col1.metric(
-        "User Avg Score",
-        f"{feedback_stats.user_avg_score:.2f}"
+        "User Postive Score Rate",
+        f"{feedback_stats.user_positive_score/feedback_stats.user_total * 100:.2f}%"
     )
 
     col2.metric(
-        "Judge Avg Score",
-        f"{feedback_stats.judge_avg_score:.2f}"
+        "Judge Positive Score Rate",
+        f"{feedback_stats.judge_positive_score/feedback_stats.judge_total * 100:.2f}%"
     )
 
     st.divider()
