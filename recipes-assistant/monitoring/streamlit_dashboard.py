@@ -321,20 +321,18 @@ with tab4:
         distribution = pd.DataFrame(
             {
                 "Source": [
-                    "User", "User", "User",
+                    "User", "User",
                     "LLM Judge", "LLM Judge", "LLM Judge"
                 ],
                 "Feedback": [
                     "Positive",
-                    "Neutral",
                     "Negative",
                     "Positive",
-                    "Neutral",
+                    "Partially Relevant",
                     "Negative",
                 ],
                 "Percentage": [
                     feedback_stats.user_score_positive / user_total * 100,
-                    feedback_stats.user_score_neutral / user_total * 100,
                     feedback_stats.user_score_negative / user_total * 100,
                     feedback_stats.judge_score_positive / judge_total * 100,
                     feedback_stats.judge_score_neutral / judge_total * 100,
@@ -353,13 +351,13 @@ with tab4:
             category_orders={
                 "Feedback": [
                     "Negative",
-                    "Neutral",
+                    "Partially Relevant",
                     "Positive",
                 ]
             },
             color_discrete_map={
                 "Positive": "#2ca02c",   # green
-                "Neutral": "#ffbf00",    # amber
+                "Partially Relevant": "#ffbf00",    # amber
                 "Negative": "#d62728",   # red
             }
         )
