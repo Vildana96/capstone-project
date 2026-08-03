@@ -243,14 +243,18 @@ The following demonstration shows the complete user workflow:
 The monitoring dashboard is organized into four tabs:
 
 * **Overview** – summarizes key application metrics, including total LLM calls, response latency, token usage, API cost, and interactive visualizations of cost, response time, and token consumption over time.
+  
+▶️ ![Dashboard Demo0](images/dashboard_demo0.gif)
 
 * **LLM Calls** – displays recently logged interactions together with model information and detailed inspection of prompts, system instructions, and generated responses, enabling analysis and debugging of individual requests.
+
+▶️ ![Dashboard Demo1](images/dashboard_demo1.gif)
 
 * **Evaluation** – presents retrieval and generation quality metrics obtained during the development phase, including Hit Rate@5, Mean Reciprocal Rank (MRR), and LLM-as-a-Judge evaluation scores.
 
 * **Feedback** – aggregates both explicit user feedback (👍/👎) and automated LLM-as-a-Judge assessments. The dashboard visualizes feedback statistics, score distributions, trends over time, and allows detailed inspection of individual conversations together with the corresponding evaluation results.
 
-▶️ ![Dashboard Demo](images/dashboard_demo.gif)
+▶️ ![Dashboard Demo2](images/dashboard_demo2.gif)
 
 
 ## Future Improvements
