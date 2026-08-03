@@ -34,9 +34,12 @@ class FeedbackStats:
     total: int
     user_total: int
     judge_total: int
-    avg_score: float
-    user_avg_score: float
-    judge_avg_score: float
+    judge_score_positive: float
+    judge_score_negative: float
+    judge_score_neutral: float
+    user_score_positive: float
+    user_score_negative: float
+    user_score_neutral: float
 
 
 @dataclass
