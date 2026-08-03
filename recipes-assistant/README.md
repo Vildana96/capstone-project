@@ -207,21 +207,20 @@ For each user request, the application records metadata such as the model used, 
 
 A dedicated Streamlit monitoring dashboard visualizes these metrics, helping identify trends in latency, token usage, costs, and feedback while providing detailed inspection of individual interactions.
 
-User
-   │
-   ▼
-Quick Recipes Assistant
-   │
-   ├──────────────► PostgreSQL
-   │                 │
-   │                 ├── LLM call logs
-   │                 └── Feedback
-   │
-   ▼
-Recipe Response
-
-           ▼
- Streamlit Dashboard
+    User
+       │
+       ▼
+    Quick Recipes Assistant
+       │
+       ├──────────────► PostgreSQL
+       │                 │
+       │                 ├── LLM call logs
+       │                 └── Feedback
+       │
+       ▼
+    Recipe Response
+            ▼
+     Streamlit Dashboard
 
 ### 🤖 Assistant Demo
 
