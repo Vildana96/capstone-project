@@ -160,11 +160,11 @@ def get_feedback_stats():
         user_total=row[1],
         judge_total=row[2],
         judge_score_positive=row[3],
-        judge_score_negative=row[4],
-        judge_score_neutral=row[5],
+        judge_score_negative=row[5],
+        judge_score_neutral=row[4],
         user_score_positive=row[6],
-        user_score_negative=row[7],
-        user_score_neutral=row[8]
+        user_score_negative=row[8],
+        user_score_neutral=row[7]
     )
 
 
