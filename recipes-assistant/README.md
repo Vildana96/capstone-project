@@ -250,7 +250,7 @@ The monitoring dashboard is organized into four tabs:
 
 * **Feedback** – aggregates both explicit user feedback (👍/👎) and automated LLM-as-a-Judge assessments. The dashboard visualizes feedback statistics, score distributions, trends over time, and allows detailed inspection of individual conversations together with the corresponding evaluation results.
 
-▶️ *Insert screen recording or GIF here*
+▶️ ![Dashboard Demo](images/dashboard_demo.gif)
 
 
 ## Future Improvements
