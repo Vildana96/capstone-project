@@ -267,12 +267,12 @@ with tab4:
 
     col1.metric(
         "User Postive Score Rate",
-        f"{feedback_stats.user_positive_score/feedback_stats.user_total * 100:.2f}%"
+        f"{feedback_stats.user_score_positive/feedback_stats.user_total * 100:.2f}%"
     )
 
     col2.metric(
         "Judge Positive Score Rate",
-        f"{feedback_stats.judge_positive_score/feedback_stats.judge_total * 100:.2f}%"
+        f"{feedback_stats.judge_score_positive/feedback_stats.judge_total * 100:.2f}%"
     )
 
     st.divider()
