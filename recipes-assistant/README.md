@@ -199,14 +199,61 @@ and labels each response as good or bad based on whether it correctly fulfills t
 
 The LLM judge evaluation cost approximately $0.56.
 
+## Monitoring
+
+To better understand the assistant's behavior and support continuous improvement, every interaction is logged together with LLM usage statistics and evaluation results.
+
+For each user request, the application records metadata such as the model used, prompt and completion token counts, response time, API cost, and timestamp. In addition to operational metrics, the system collects user feedback (👍 / 👎) and LLM-as-a-Judge evaluations, making it possible to analyze both system performance and response quality over time.
+
+A dedicated Streamlit monitoring dashboard visualizes these metrics, helping identify trends in latency, token usage, costs, and feedback while providing detailed inspection of individual interactions.
+
+User
+   │
+   ▼
+Quick Recipes Assistant
+   │
+   ├──────────────► PostgreSQL
+   │                 │
+   │                 ├── LLM call logs
+   │                 └── Feedback
+   │
+   ▼
+Recipe Response
+
+           ▼
+ Streamlit Dashboard
+
+### 🤖 Assistant Demo
+
+The following demonstration shows the complete user workflow:
+
+* entering a natural language recipe request,
+* retrieving relevant recipes using the RAG pipeline,
+* generating a grounded response with an LLM,
+* logging the interaction for monitoring,
+* collecting optional user feedback.
+
+▶️ *Insert screen recording or GIF here*
+
+### 📊 Dashboard Demo
+
+The monitoring dashboard is organized into four tabs:
+
+* **Overview** – summarizes key application metrics, including total LLM calls, response latency, token usage, API cost, and interactive visualizations of cost, response time, and token consumption over time.
+
+* **LLM Calls** – displays recently logged interactions together with model information and detailed inspection of prompts, system instructions, and generated responses, enabling analysis and debugging of individual requests.
+
+* **Evaluation** – presents retrieval and generation quality metrics obtained during the development phase, including Hit Rate@5, Mean Reciprocal Rank (MRR), and LLM-as-a-Judge evaluation scores.
+
+* **Feedback** – aggregates both explicit user feedback (👍/👎) and automated LLM-as-a-Judge assessments. The dashboard visualizes feedback statistics, score distributions, trends over time, and allows detailed inspection of individual conversations together with the corresponding evaluation results.
+
+▶️ *Insert screen recording or GIF here*
+
+
 ## Future Improvements
 - Semantic search
-- PostgreSQL + pgvector for vector storage 
 - Docker deployment
-- Streamlit frontend
 - Grafana dashboard
-- Retrieval monitoring
-- User feedback collection
 - Recipe popularity analytics
-- Continuous evaluation pipeline
+
 
